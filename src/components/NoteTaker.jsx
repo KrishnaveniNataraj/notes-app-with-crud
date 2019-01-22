@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+//import AddIcon from '@material-ui/icons/Add';
 import { withStyles } from '@material-ui/core';
 import { Tooltip } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
@@ -9,16 +9,31 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import {slack,black} from '@material-ui/core/colors';
 
 const styles = theme => ({
+    root: {
+        backgroundColor: theme.palette.background.paper,
+        width: 500,
+        position: 'relative',
+        minHeight: 200,
+      },
+     
     fab: {
         margin: theme.spacing.unit * 2,
+        primary: slack,
+        secondary: black,
+    
     },
     absolute: {
         position: 'absolute',
-        bottom: theme.spacing.unit * 2,
+        borderRadius:5,
+        width:100,
+        top: theme.spacing.unit * 0.5,
         right: theme.spacing.unit * 3,
     },
+
+   
 });
 
 class NoteTaker extends Component {
@@ -76,7 +91,7 @@ class NoteTaker extends Component {
                         className={classes.absolute}
                         onClick={this.handleClickOpen}
                     >
-                        <AddIcon />
+                    Add Note
                     </Fab>
                 </Tooltip>
                 <Dialog
@@ -85,14 +100,14 @@ class NoteTaker extends Component {
                     aria-labelledby="Add note form"
                 >
                     <DialogTitle id="Add note form">
-                        Add Note
+                        New Note
                     </DialogTitle>
                     <DialogContent>
                         <TextField
                             autoFocus
                             margin="dense"
                             id="note title"
-                            label="Note Title"
+                            label=" Title"
                             type="text"
                             fullWidth
                             onChange={this.handleNoteTitleChange}
@@ -101,7 +116,7 @@ class NoteTaker extends Component {
                         <TextField
                             margin="dense"
                             id="note description"
-                            label="Note Description"
+                            label=" Description"
                             type="text"
                             onChange={this.handleNoteDescriptionChange}
                             value={this.state.noteDescription}
@@ -109,11 +124,12 @@ class NoteTaker extends Component {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
-                            Cancel
-                        </Button>
+                        
                         <Button onClick={this.handleAddNote} color="primary">
                             Save
+                        </Button>
+                        <Button onClick={this.handleClose} color="primary">
+                            Cancel
                         </Button>
                     </DialogActions>
                 </Dialog>

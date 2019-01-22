@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import { Card, CardHeader, CardContent, CardActions, withStyles } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from '@material-ui/icons/DeleteForever';
 import { Link } from 'react-router-dom';
+import pink from '@material-ui/core/colors';
 
 const styles = theme => ({
     deleteIcon: {
         justifyContent: 'flex-end',
+        color:pink
+
+        
     }
 });
 
@@ -31,8 +35,9 @@ class Note extends Component {
                 </CardContent>
                 <CardActions className={classes.deleteIcon}>
                     <IconButton onClick={handleRemoveNote.bind(null, note.id)}>
-                        <DeleteIcon />
-                    </IconButton>
+                    <MuiThemeProvider theme={theme}> <DeleteIcon />
+                    </MuiThemeProvider >                 
+                      </IconButton>
                 </CardActions>
             </Card>
         );

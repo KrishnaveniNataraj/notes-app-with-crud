@@ -84,12 +84,12 @@ class EditNote extends Component {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={this.handleClose} color="primary">
-                        Cancel
-                        </Button>
                     <Button onClick={this.handleUpdateNote} color="primary">
                         Update
                     </Button>
+                    <Button onClick={this.handleClose} color="primary">
+                        Cancel
+                 </Button>
                 </DialogActions>
             </Dialog>
         );

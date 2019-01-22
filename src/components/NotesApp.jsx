@@ -3,14 +3,17 @@ import Grid from '@material-ui/core/Grid';
 import Header from './Header';
 import NoteTaker from './NoteTaker';
 import NotesContainer from './NotesContainer';
-import { blue, pink } from '@material-ui/core/colors';
+//import pink from '@material-ui/core/colors/pink';
+import {black,deepPurple } from '@material-ui/core/colors';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+//const pinkColor=pink[400];
+
 
 const theme = createMuiTheme({
     palette: {
-        primary: blue,
-        secondary: pink,
-    },
+       primary:deepPurple,
+       secondary:black
+},
     typography: {
         useNextVariants: true,
     },
