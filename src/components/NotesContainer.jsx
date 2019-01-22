@@ -1,31 +1,19 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
+import { Grid } from '@material-ui/core';
+import Note from './Note';
 
-
-class NotesContainer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            view: 'gridView',
-            notes: []
+const NotesContainer = (props) => (
+    <Grid container spacing={8}>
+        {
+            props.notes.map(note =>  {
+                return (
+                    <Grid key={note.id} item xs={12} sm={4} xl={3}>
+                        <Note note={note} handleRemoveNote={props.handleRemoveNote} />
+                    </Grid>
+                );
+            })
         }
-        this.toggleView = this.toggleView.bind(this);
-    }
-
-    componentDidMount() {
-        fetch('http://localhost:3000/notes')
-            .then(response => response.json())
-            .then(notes => this.setState(() => { notes }));
-    }
-
-    toggleView() {}
-
-    render() {
-        return (
-            <Fragment>
-
-            </Fragment>
-        );
-    }
-}
+    </Grid>
+);
 
 export default NotesContainer;

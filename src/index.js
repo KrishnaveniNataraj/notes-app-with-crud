@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import NotesApp from './components/NotesApp';
+import AppRouter from './routers/AppRouter';
 
-ReactDOM.render(<NotesApp />, document.getElementById('root'));
+ReactDOM.render(<AppRouter />, document.getElementById('root'));
 
