@@ -12,27 +12,71 @@ class AppRouter extends Component {
         this.handleAddNote = this.handleAddNote.bind(this);
         this.handleRemoveNote = this.handleRemoveNote.bind(this);
         this.handleUpdateNote = this.handleUpdateNote.bind(this);
+      
     }
 
-    componendDidMount() {
+    componentDidMount() {
+        console.log('hi');
+        fetch('http://localhost:8080/notes')
+            .then(function (res) {
+                return res.json()
+            }).then(notes=>this.setState({notes}));
+               
+        
         // Get all the notes
-    }
+       /* fetch('http://localhost:8080/notes')
+        .then(res => res.json())
+        .then(
+          (result) => {
+            
+            this.setState({
+              isLoaded: true,
+              items: result.items
+            });
 
-    handleAddNote(note) {
+          },
+          
+          (error) => {
+            this.setState({
+              isLoaded: true,
+              error
+            });
+          }
+        )*/
+    }
+  
+     handleAddNote(note) {
         this.setState((currState) => ({
             notes: currState.notes.concat([note])
         }));
 
-        // Post a new note
+        console.log('Posting request to GitHub API...',note);
+       fetch('http://localhost:8080/notes', {
+     
+    method: 'POST',
+    headers:{
+        'content-type':'application/json'
+    },
+    body: JSON.stringify(note)
+  }).then(response => {
+      if(response.ok)
+        return response.json();
+    
+  }).then(data => {
+          console.log('Created note:',data);
+  })
     }
+
 
     handleRemoveNote(noteId) {
         const noteIndexToRemove = this.state.notes.findIndex(note => note.id === noteId);  
         this.setState((currState) => ({
             notes: [...currState.notes.slice(0, noteIndexToRemove), ...currState.notes.slice(noteIndexToRemove + 1)]
         }));
-
         // Delete the note
+        fetch(`http://localhost:8080/notes/${noteId}`, {    
+                    method: 'DELETE',
+         }).then(response=>response.json());
     }
 
     handleUpdateNote(updatedNote) {
@@ -41,7 +85,12 @@ class AppRouter extends Component {
             notes: [...currState.notes.slice(0, noteIndexToUpdate), {...updatedNote}, ...currState.notes.slice(noteIndexToUpdate + 1)]
         }));
 
-        // Update the note
+        fetch(`http://localhost:8080/notes/${updatedNote.id}`, {    
+                    method: 'PUT',
+                    headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify(updatedNote),
+
+         }).then(response=>response.json());
     }
 
     render() {
@@ -54,6 +103,7 @@ class AppRouter extends Component {
                                                 {...props}
                                                 notes={this.state.notes}
                                                 handleAddNote={this.handleAddNote}
+                                                componendDidMount={this.componendDidMount}
                                                 handleRemoveNote={this.handleRemoveNote}
                                             />)}
                         exact 

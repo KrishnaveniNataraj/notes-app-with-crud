@@ -4,14 +4,14 @@ import Header from './Header';
 import NoteTaker from './NoteTaker';
 import NotesContainer from './NotesContainer';
 //import pink from '@material-ui/core/colors/pink';
-import {black,deepPurple } from '@material-ui/core/colors';
+import {black,lightGreen } from '@material-ui/core/colors';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 //const pinkColor=pink[400];
 
 
 const theme = createMuiTheme({
     palette: {
-       primary:deepPurple,
+       primary:lightGreen,
        secondary:black
 },
     typography: {

@@ -49,7 +49,48 @@ const styles = theme => ({
 });
 
 class SearchBar extends Component {
-    render() {
+  /*  state = {
+        query: "",
+        data: [],
+        filteredData: []
+      };
+    
+      handleInputChange = event => {
+        const query = event.target.value;
+    
+        this.setState(prevState => {
+          const filteredData = prevState.data.filter(element => {
+            return element.name.toLowerCase().includes(query.toLowerCase());
+          });
+    
+          return {
+            query,
+            filteredData
+          };
+        });
+      };
+    
+      getData = () => {
+        fetch(`http://localhost:8080/notes`)
+          .then(response => response.json())
+          .then(data => {
+            const { query } = this.state;
+            const filteredData = data.filter(element => {
+              return element.name.toLowerCase().includes(query.toLowerCase());
+            });
+    
+            this.setState({
+              data,
+              filteredData
+            });
+          });
+      };
+    
+      componentWillMount() {
+        this.getData();
+      }
+      */
+     render() {
         const { classes } = this.props;
         return (
             <div className={classes.search}>
@@ -58,11 +99,14 @@ class SearchBar extends Component {
                 </div>
                 <InputBase
                     placeholder="Search…"
-                    classes={{
+                   classes={{
                         root: classes.inputRoot,
                         input: classes.inputInput,
                     }}
+                   // value={this.state.query}
+                    //onChange={this.handleInputChange}                  
                 />
+               
             </div>
         );
     }

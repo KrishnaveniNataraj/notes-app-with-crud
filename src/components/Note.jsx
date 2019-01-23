@@ -35,9 +35,8 @@ class Note extends Component {
                 </CardContent>
                 <CardActions className={classes.deleteIcon}>
                     <IconButton onClick={handleRemoveNote.bind(null, note.id)}>
-                    <MuiThemeProvider theme={theme}> <DeleteIcon />
-                    </MuiThemeProvider >                 
-                      </IconButton>
+                     <DeleteIcon />
+                 </IconButton>
                 </CardActions>
             </Card>
         );
