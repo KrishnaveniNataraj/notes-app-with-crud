@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import AppRouter from './routers/AppRouter';
+import NotesAppRouter from './routers/NotesAppRouter';
 
-ReactDOM.render(<AppRouter />, document.getElementById('root'));
+ReactDOM.render(<NotesAppRouter />, document.getElementById('root'));
 

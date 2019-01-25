@@ -1,42 +1,49 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
 import Header from './Header';
-import NoteTaker from './NoteTaker';
 import NotesContainer from './NotesContainer';
-//import pink from '@material-ui/core/colors/pink';
-import {black,lightGreen } from '@material-ui/core/colors';
+import { lightGreen, black, pink } from '@material-ui/core/colors';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-//const pinkColor=pink[400];
-
+import Grid from '@material-ui/core/Grid';
+import NoteTaker from './NoteTaker';
 
 const theme = createMuiTheme({
     palette: {
-       primary:lightGreen,
-       secondary:black
-},
+        primary: lightGreen,
+        secondary: black,
+        error: pink,
+    },
     typography: {
         useNextVariants: true,
     },
 });
 
 class NotesApp extends Component {
+    constructor(props) {
+        super(props);
+        this.toggleView = this.toggleView.bind(this);
+    }
+
+    toggleView(viewType) {
+        this.props.changeDisplayView(viewType);
+    }
+
     render() {
-        const { notes, handleAddNote, handleRemoveNote } = this.props; 
+        const { myNotes, handleAddNote, handleDeleteNote, displayView, filterNotes } = this.props;
         return (
             <MuiThemeProvider theme={theme}>
                 <Grid container spacing={8}>
                     <Grid item xs={12}>
-                        <Header />
+                        <Header toggleView={this.toggleView} viewType={displayView} filterNotes={filterNotes} />
                     </Grid>
-                    <Grid item xs={12}>
+                    {<Grid item xs={12}>
                         <NoteTaker handleAddNote={handleAddNote} />
-                    </Grid>
+                    </Grid>}
                     <Grid item xs={12}>
-                        <NotesContainer notes={notes} handleRemoveNote={handleRemoveNote} />
+                        <NotesContainer viewType={displayView} myNotes={myNotes} handleDeleteNote={handleDeleteNote} />
                     </Grid>
                 </Grid>
             </MuiThemeProvider>
-        );
+        )
     }
 }
 

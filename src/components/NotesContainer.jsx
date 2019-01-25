@@ -1,19 +1,21 @@
-import React from 'react';
-import { Grid } from '@material-ui/core';
-import Note from './Note';
+import React, { Fragment } from 'react';
+import GridView from './GridView';
+import ListView from './ListView';
 
-const NotesContainer = (props) => (
-    <Grid container spacing={8}>
-        {
-            props.notes.map(note =>  {
-                return (
-                    <Grid key={note.id} item xs={12} sm={4} xl={3}>
-                        <Note note={note} handleRemoveNote={props.handleRemoveNote} />
-                    </Grid>
-                );
-            })
-        }
-    </Grid>
-);
+const NotesContainer = (props) => ({
+    render() {
+        const {myNotes,handleDeleteNote} = this.props;
+
+        return (
+            <Fragment>
+                {(myNotes.length > 0) ?
+                    ((this.props.viewType === 'gridView') ?
+                        (<GridView myNotes={myNotes} handleDeleteNote={handleDeleteNote} />) : (<ListView myNotes={myNotes} handleDeleteNote={handleDeleteNote} />))
+                    : (<p align='center'><h2>No Notes...</h2></p>)}
+                
+            </Fragment>
+        );
+    }
+});
 
 export default NotesContainer;

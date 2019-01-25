@@ -29,7 +29,7 @@ const styles = theme => ({
         position: 'absolute',
         borderRadius:5,
         width:100,
-        top: theme.spacing.unit * 0.5,
+        bottom: theme.spacing.unit * 0.5,
         right: theme.spacing.unit * 3,
     },
 
@@ -91,7 +91,7 @@ class NoteTaker extends Component {
                         className={classes.absolute}
                         onClick={this.handleClickOpen}
                     >
-                    Add Note
+                    Note ++
                     </Fab>
                 </Tooltip>
                 <Dialog

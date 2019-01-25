@@ -11,12 +11,12 @@ class EditNote extends Component {
         super(props);
         this.state = {
             open: true,
-            noteTitle: this.props.notes.filter(note => note.id === parseFloat(this.props.match.params.id))[0].noteTitle,
-            noteDescription: this.props.notes.filter(note => note.id === parseFloat(this.props.match.params.id))[0].noteDescription,
+            noteTitle: this.props.myNotes.filter(note => note.id === parseFloat(this.props.match.params.id))[0].noteTitle,
+            noteDescription: this.props.myNotes.filter(note => note.id === parseFloat(this.props.match.params.id))[0].noteDescription
         }
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleUpdateNote = this.handleUpdateNote.bind(this);
-        this.handleClose = this.handleClose.bind(this);
+        this.handleClickClose = this.handleClickClose.bind(this);
         this.handleNoteTitleChange = this.handleNoteTitleChange.bind(this);
         this.handleNoteDescriptionChange = this.handleNoteDescriptionChange.bind(this);
     }
@@ -24,9 +24,9 @@ class EditNote extends Component {
     handleClickOpen() {
         this.setState({ open: true });
     }
-    
-    handleClose() {
-        this.setState({ 
+
+    handleClickClose() {
+        this.setState({
             open: false,
             noteTitle: '',
             noteDescription: '',
@@ -49,24 +49,24 @@ class EditNote extends Component {
             noteDescription: this.state.noteDescription,
         }
         this.props.handleUpdateNote(updatedNote);
-        this.handleClose();
+        this.handleClickClose();
     }
 
     render() {
         return (
             <Dialog
                 open={this.state.open}
-                onClose={this.handleClose}
-                aria-labelledby="Edit note form"
+                onClose={this.handleClickClose}
+                aria-labelledby="Edit Note Form"
             >
-                <DialogTitle id="Edit note form">
+                <DialogTitle id="Edit Note Form">
                     Edit Note
                 </DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus
                         margin="dense"
-                        id="note title"
+                        id="note-title"
                         label="Note Title"
                         type="text"
                         fullWidth
@@ -75,21 +75,21 @@ class EditNote extends Component {
                     />
                     <TextField
                         margin="dense"
-                        id="note description"
+                        id="note-description"
                         label="Note Description"
                         type="text"
+                        fullWidth
                         onChange={this.handleNoteDescriptionChange}
                         value={this.state.noteDescription}
-                        fullWidth
                     />
                 </DialogContent>
                 <DialogActions>
+                    <Button onClick={this.handleClickClose} color="primary">
+                        Cancel
+                        </Button>
                     <Button onClick={this.handleUpdateNote} color="primary">
                         Update
                     </Button>
-                    <Button onClick={this.handleClose} color="primary">
-                        Cancel
-                 </Button>
                 </DialogActions>
             </Dialog>
         );
